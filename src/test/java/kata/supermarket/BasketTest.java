@@ -5,6 +5,9 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
 
+import kata.supermarket.discount.BuyOneGetOneFreeDiscount;
+import kata.supermarket.discount.Discount;
+
 import java.math.BigDecimal;
 import java.util.Arrays;
 import java.util.Collections;
@@ -19,6 +22,8 @@ class BasketTest {
     @ParameterizedTest(name = "{0}")
     void basketProvidesTotalValue(String description, String expectedTotal, Iterable<Item> items) {
         final Basket basket = new Basket();
+        Discount ryvitaDiscount = new BuyOneGetOneFreeDiscount(3);
+        basket.addDiscount(ryvitaDiscount);
         items.forEach(basket::add);
         assertEquals(new BigDecimal(expectedTotal), basket.total());
     }
@@ -70,15 +75,15 @@ class BasketTest {
     
 
     private static Item aPintOfMilk() {
-        return new Product(new BigDecimal("0.49")).oneOf();
+        return new Product(new BigDecimal("0.49"), 1).oneOf();
     }
 
     private static Item aPackOfDigestives() {
-        return new Product(new BigDecimal("1.55")).oneOf();
+        return new Product(new BigDecimal("1.55"), 2).oneOf();
     }
     
     private static Item aPackOfRyvita() {
-        return new Product(new BigDecimal("1.25")).oneOf();
+        return new Product(new BigDecimal("1.25"), 3).oneOf();
     }
 
     private static WeighedProduct aKiloOfAmericanSweets() {

@@ -6,15 +6,24 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
+import kata.supermarket.discount.Discount;
+import kata.supermarket.discount.DiscountCalculator;
+
 public class Basket {
     private final List<Item> items;
+    private final DiscountCalculator discCalc;
 
     public Basket() {
         this.items = new ArrayList<>();
+        discCalc = new DiscountCalculator();
     }
 
     public void add(final Item item) {
         this.items.add(item);
+    }
+    
+    public void addDiscount(final Discount discount) {
+    	discCalc.addDiscount(discount);
     }
 
     List<Item> items() {
@@ -47,7 +56,8 @@ public class Basket {
          *  which provides that functionality.
          */
         private BigDecimal discounts() {
-            return BigDecimal.ZERO;
+        	BigDecimal discounts = discCalc.calculateDiscounts(items);
+        	return discounts;
         }
 
         private BigDecimal calculate() {
