@@ -29,9 +29,16 @@ class BasketTest {
                 aSingleItemPricedPerUnit(),
                 multipleItemsPricedPerUnit(),
                 aSingleItemPricedByWeight(),
-                multipleItemsPricedByWeight()
+                multipleItemsPricedByWeight(),
+                aSingleRyvitaPricedPerUnit(),
+                multipleRyvitaPricedPerUnit()
         );
     }
+    
+    private static Arguments aSingleRyvitaPricedPerUnit() {
+		return Arguments.of("1 packs of Ryvita with buy one get one free offer", "1.25",
+                Arrays.asList(aPackOfRyvita()));
+	}
 
     private static Arguments aSingleItemPricedByWeight() {
         return Arguments.of("a single weighed item", "1.25", Collections.singleton(twoFiftyGramsOfAmericanSweets()));
@@ -55,6 +62,12 @@ class BasketTest {
     private static Arguments noItems() {
         return Arguments.of("no items", "0.00", Collections.emptyList());
     }
+    
+    private static Arguments multipleRyvitaPricedPerUnit() {
+    	return Arguments.of("2 packs of Ryvita with buy one get one free offer", "1.25",
+                Arrays.asList(aPackOfRyvita(), aPackOfRyvita()));
+	}
+    
 
     private static Item aPintOfMilk() {
         return new Product(new BigDecimal("0.49")).oneOf();
@@ -62,6 +75,10 @@ class BasketTest {
 
     private static Item aPackOfDigestives() {
         return new Product(new BigDecimal("1.55")).oneOf();
+    }
+    
+    private static Item aPackOfRyvita() {
+        return new Product(new BigDecimal("1.25")).oneOf();
     }
 
     private static WeighedProduct aKiloOfAmericanSweets() {
