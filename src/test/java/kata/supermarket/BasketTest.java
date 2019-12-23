@@ -36,7 +36,9 @@ class BasketTest {
                 aSingleItemPricedByWeight(),
                 multipleItemsPricedByWeight(),
                 aSingleRyvitaPricedPerUnit(),
-                multipleRyvitaPricedPerUnit()
+                multipleRyvitaPricedPerUnit(),
+                threeRyvitaPricedPerUnit(),
+                fiveRyvitaAndPintofMilkPricedPerUnit()
         );
     }
     
@@ -71,6 +73,22 @@ class BasketTest {
     private static Arguments multipleRyvitaPricedPerUnit() {
     	return Arguments.of("2 packs of Ryvita with buy one get one free offer", "1.25",
                 Arrays.asList(aPackOfRyvita(), aPackOfRyvita()));
+	}
+    
+    private static Arguments threeRyvitaPricedPerUnit() {
+    	return Arguments.of("3 packs of Ryvita with buy one get one free offer", "2.50",
+                Arrays.asList(aPackOfRyvita(), aPackOfRyvita(), aPackOfRyvita()));
+	}
+    
+    private static Arguments fiveRyvitaAndPintofMilkPricedPerUnit() {
+    	return Arguments.of("5 packs of Ryvita with buy one get one free offer and a pint of milk", "4.24",
+                Arrays.asList(aPackOfRyvita(), 
+                		aPackOfRyvita(), 
+                		aPackOfRyvita(),
+                		aPackOfRyvita(),
+                		aPackOfRyvita(),
+                		aPintOfMilk()
+                		));
 	}
     
 
